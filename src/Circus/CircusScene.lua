@@ -52,7 +52,7 @@ function CircusScene:init_bg()
     self:addChild(bgAudience2)
     
     
-    self.moveby = cc.MoveBy:create(10, cc.p(-self.audienceSize.width ,0))
+    self.moveby = cc.MoveBy:create(50, cc.p(-self.audienceSize.width ,0))
     self.moveby:retain()
     
     self.bgAudience1:runAction(cc.Sequence:create(self.moveby:clone(), 
@@ -61,7 +61,7 @@ function CircusScene:init_bg()
 end
 
 function CircusScene:swapbg()
-    self.bgAudience1:setPosition(cc.p(-self.audienceSize.width, 768/2))
+    self.bgAudience1:setPosition(cc.p(self.audienceSize.width, 768/2))
     local t = self.bgAudience1;
     self.bgAudience1 = self.bgAudience2
     self.bgAudience2 = t
