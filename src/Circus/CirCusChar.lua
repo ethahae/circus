@@ -46,10 +46,11 @@ function CirCusChar:registEvent()
         end --restart cheating,should be remove later
         if (self.jumping == true or self.dead == true) then return true end
         self.jumping = true
-        local moveback = cc.MoveTo:create(CONSTANTS.JUMP_TIME,cc.p(self:getPosition()))
-        local moveup = cc.MoveTo:create(CONSTANTS.JUMP_TIME, cc.p(self:getPositionX(), self:getPositionY() + self:getBoundingBox().height * CONSTANTS.JUMP_HEIGHT))
+        --local moveback = cc.MoveTo:create(CONSTANTS.JUMP_TIME,cc.p(self:getPosition()))
+        --local moveup = cc.MoveTo:create(CONSTANTS.JUMP_TIME, cc.p(self:getPositionX(), self:getPositionY() + self:getBoundingBox().height * CONSTANTS.JUMP_HEIGHT))
+        local jumpby = cc.JumpBy:create(CONSTANTS.JUMP_TIME, cc.p(0,0), self:getBoundingBox().height * 2.5, 1)
         local checkAttach = cc.CallFunc:create(function() self:checkAttach() end)
-        self:runAction(cc.Sequence:create(moveup, moveback, checkAttach))
+        self:runAction(cc.Sequence:create(jumpby, checkAttach))
         if (self.ball ~= nil) then
             self.ball:beDetach()
             self.ball = nil
