@@ -52,6 +52,7 @@ function CircusScene:init_bg()
     self:addChild(bgAudience2)
     
     
+    
     self.moveby = cc.MoveBy:create(50, cc.p(-self.audienceSize.width ,0))
     self.moveby:retain()
     
@@ -90,6 +91,24 @@ function CircusScene:setConfigUi()
     self.jumpTimeSlider = configui:getChildByName("JumpTimeSlider")
     self.attachWidthSlider:setPercent(50)
     self.jumpTimeSlider:setPercent(100)
+    
+    self.speedLable:setVisible(false)
+    self.attachWidthLable:setVisible(false)
+    self.jumpTimeLable:setVisible(false)
+    self.speedSlider:setVisible(false)
+    self.attachWidthSlider:setVisible(false)
+    self.jumpTimeSlider:setVisible(false)
+    
+--    local menuIm = cc.MenuItemLabel:create()
+--    menuIm.setString("5555")
+--    
+--    
+--    local menu = cc.Menu:create();
+--    menu:addChild(menuIm);
+--    local size = cc.Director:getInstance():getWinSize();
+--    menu:setPosition(size.width/2,size.height/2);
+--    self:addChild(menu,2);
+    
     CONSTANTS.BALL_SPEED = CONSTANTS.BALL_SPEED_ORIGIN * self.speedSlider:getPercent() / 5
     CONSTANTS.ATTACH_WIDTH = CONSTANTS.ATTACH_WIDTH_ORIGIN * self.attachWidthSlider:getPercent() / 100
     CONSTANTS.JUMP_TIME = CONSTANTS.JUMP_TIME_ORIGIN * self.jumpTimeSlider:getPercent() / 100
