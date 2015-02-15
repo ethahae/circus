@@ -33,15 +33,15 @@ end
 
 function CirCusBall:enterStage()
     self:stopAllActions()
-    self:setOpacity(0)
+    self:setOpacity(255)
     local startpos = cc.p(1000, self:getPositionY())
     local endpos = cc.p(-self:getBoundingBox().width, self:getPositionY())
     local distance = cc.pGetDistance(startpos,endpos)
-    local time = distance / (self:getBoundingBox().width * CONSTANTS.BALL_SPEED)
+    local speed_factor = math.random(3.5,6.1)
+    local time = distance / (self:getBoundingBox().width * speed_factor)
     local step1 = cc.CallFunc:create(function() self:setPosition(startpos) end)
-    local fadein  = cc.FadeIn:create(2)
     local moveIn  = cc.MoveTo:create(time, cc.p(endpos)) --move out to the scene
-    local step2 = cc.Spawn:create(fadein, moveIn)
+    local step2 =  moveIn
     self:runAction(cc.Sequence:create(step1, step2))
     self:runAction(cc.RepeatForever:create(cc.RotateBy:create(1,-170)))
 end
