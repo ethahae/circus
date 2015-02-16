@@ -56,7 +56,6 @@
 		9FF504861A5E881200AFDA55 /* libsimulator Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF5047E1A5E86D600AFDA55 /* libsimulator Mac.a */; };
 		9FF504871A5E88CE00AFDA55 /* libsimulator iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FF504801A5E86D600AFDA55 /* libsimulator iOS.a */; };
 		9FFC07361A4A764100AED399 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9FFC07341A4A764100AED399 /* MainMenu.xib */; };
-		C03781B918BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C03781BA18BF655400FE4F13 /* res in Resources */ = {isa = PBXBuildFile; fileRef = C03781B718BF655400FE4F13 /* res */; };
 		C05D1C121923449100B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C111923449100B808A4 /* config.json */; };
 		C05D1C131923449100B808A4 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = C05D1C111923449100B808A4 /* config.json */; };
@@ -611,7 +610,6 @@
 				5023811F17EBBCAC00990C9B /* Icon-152.png in Resources */,
 				5023812017EBBCAC00990C9B /* Icon-57.png in Resources */,
 				521A8E7019F0C3D200D177D7 /* Default-667h@2x.png in Resources */,
-				C03781B918BF655400FE4F13 /* res in Resources */,
 				5023812217EBBCAC00990C9B /* Icon-76.png in Resources */,
 				5091733A17ECE17A00D62437 /* Icon-80.png in Resources */,
 				5091733717ECE17A00D62437 /* Icon-40.png in Resources */,

@@ -81,6 +81,28 @@
             <PrePosition X="0.3447" Y="0.2264" />
             <PreSize X="0.0000" Y="0.0000" />
           </NodeObjectData>
+          <NodeObjectData Name="ScoreLable" ActionTag="-1982496757" FrameEvent="" Tag="9" ObjectIndex="5" PositionPercentXEnabled="True" LeftMargin="475.0000" RightMargin="475.0000" TopMargin="218.5000" BottomMargin="138.5000" FontSize="20" LabelText="Score: 0" ctype="TextObjectData">
+            <Position X="512.0000" Y="150.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Size X="74.0000" Y="23.0000" />
+            <PrePosition X="0.5000" Y="0.3947" />
+            <PreSize X="0.0723" Y="0.0605" />
+          </NodeObjectData>
+          <NodeObjectData Name="AgainButton" ActionTag="1196878184" FrameEvent="" Tag="10" ObjectIndex="1" LeftMargin="649.1779" RightMargin="328.8221" TopMargin="209.7858" BottomMargin="134.2142" TouchEnable="True" FontSize="14" ButtonText="Again" Scale9Width="46" Scale9Height="36" ctype="ButtonObjectData">
+            <Position X="672.1779" Y="152.2142" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Size X="46.0000" Y="36.0000" />
+            <PrePosition X="0.6564" Y="0.4006" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <TextColor A="255" R="65" G="65" B="70" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" />
+            <PressedFileData Type="Default" Path="Default/Button_Press.png" />
+            <NormalFileData Type="Default" Path="Default/Button_Normal.png" />
+          </NodeObjectData>
         </Children>
       </ObjectData>
     </Content>

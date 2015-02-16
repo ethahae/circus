@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-zip -r package.zip res/* src/*
+zip -r package.zip res/circus.png src/main.lua res/* src/*
 VER=`date "+%Y%m%d-%H:%M:%S"`
 echo "update package version $VER"
 echo $VER > version

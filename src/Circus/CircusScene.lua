@@ -1,8 +1,6 @@
 CONSTANTS = {
-    BALL_SPEED_ORIGIN = 0.4,
     ATTACH_WIDTH_ORIGIN = 1,
     JUMP_TIME_ORIGIN = 1,
-    BALL_SPEED   = 2, --球的直径
     ATTACH_WIDTH = 1, --以人的中心为准, 向两边扩展, 基数是球的直径
     JUMP_TIME    = 1  --人物跳跃时间,second
 }
@@ -29,7 +27,19 @@ function CircusScene:ctor()
     self:addChild(ball2)
     char:attach(ball1)
     ball2:enterStage()
+    self.ball1 = ball1
+    self.ball2 = ball2
     self.char = char
+    char.scene = self
+    cc.SimpleAudioEngine:getInstance():playMusic("background2.mp3",true)
+    self:getScheduler():scheduleScriptFunc(function() self:Crash() end, 1/60.0, false)
+end
+
+function CircusScene:Crash()
+    if cc.rectIntersectsRect(self.ball1:getBoundingBox(),self.ball2:getBoundingBox()) 
+        and self.char.dead == false then
+        self.char:Die()
+    end
 end
 
 function CircusScene:init_bg()
@@ -61,6 +71,15 @@ function CircusScene:init_bg()
     self.bgAudience2:runAction(self.moveby:clone())
 end
 
+function CircusScene:pausebg()
+    self.bgAudience1:pause()
+    self.bgAudience2:pause()
+end
+function CircusScene:resumebg()
+    self.bgAudience1:resume()
+    self.bgAudience2:resume()
+end
+
 function CircusScene:swapbg()
     self.bgAudience1:setPosition(cc.p(self.audienceSize.width, 768/2))
     local t = self.bgAudience1;
@@ -72,13 +91,16 @@ function CircusScene:swapbg()
 end
 
 function CircusScene:reset()
-    self.char:reset()
     CircusBallManager:reset()
+    self.char:reset()
     self.char:attach(CircusBallManager.balls[1])
+    self.scoreLable:setString("Score: 0")
+    self.againButton:setVisible(false)
     CircusBallManager.balls[2]:enterStage()
 end
 
 function CircusScene:setConfigUi()
+    
     local configui = cc.CSLoader:createNode("ConfigUI.csb")
     self.configui = configui
     configui:setNormalizedPosition(cc.p(0.0, 0.55))
@@ -89,15 +111,20 @@ function CircusScene:setConfigUi()
     self.speedSlider = configui:getChildByName("BallSpeedSlider")
     self.attachWidthSlider = configui:getChildByName("AttachWidthSlider")
     self.jumpTimeSlider = configui:getChildByName("JumpTimeSlider")
-    self.attachWidthSlider:setPercent(50)
-    self.jumpTimeSlider:setPercent(100)
-    
+    self.againButton = configui:getChildByName("AgainButton")
+    self.scoreLable = configui:getChildByName("ScoreLable")
+    --local highScore = cc.UserDefault:getInstance():getIntegerForKey("HIGH_SCORE", 0)
+    self.scoreLable:setString("Score: " .. 0)
+    self.againButton:setVisible(false)
     self.speedLable:setVisible(false)
     self.attachWidthLable:setVisible(false)
     self.jumpTimeLable:setVisible(false)
-    self.speedSlider:setVisible(false)
     self.attachWidthSlider:setVisible(false)
     self.jumpTimeSlider:setVisible(false)
+    self.speedSlider:setVisible(false)
+    self.attachWidthSlider:setPercent(50)
+    self.jumpTimeSlider:setPercent(100)
+
     
 --    local menuIm = cc.MenuItemLabel:create()
 --    menuIm.setString("5555")
@@ -110,17 +137,11 @@ function CircusScene:setConfigUi()
 --    self:addChild(menu,2);
     
     CONSTANTS.BALL_SPEED = CONSTANTS.BALL_SPEED_ORIGIN * self.speedSlider:getPercent() / 5
+
     CONSTANTS.ATTACH_WIDTH = CONSTANTS.ATTACH_WIDTH_ORIGIN * self.attachWidthSlider:getPercent() / 100
     CONSTANTS.JUMP_TIME = CONSTANTS.JUMP_TIME_ORIGIN * self.jumpTimeSlider:getPercent() / 100
-    self.speedLable:setString("speed " .. CONSTANTS.BALL_SPEED)
     self.attachWidthLable:setString("attach " .. CONSTANTS.ATTACH_WIDTH)
     self.jumpTimeLable:setString("jump time " .. CONSTANTS.JUMP_TIME)
-    local speedCallBack = function(ref, event_type)
-        if (event_type == ccui.SliderEventType.percentChanged) then
-            CONSTANTS.BALL_SPEED = CONSTANTS.BALL_SPEED_ORIGIN * self.speedSlider:getPercent() / 5 
-            self.speedLable:setString("speed " .. CONSTANTS.BALL_SPEED)
-        end
-    end
     local attachCallback = function(ref, event_type)
         if (event_type == ccui.SliderEventType.percentChanged) then
             CONSTANTS.ATTACH_WIDTH = CONSTANTS.ATTACH_WIDTH_ORIGIN * self.attachWidthSlider:getPercent() / 100
@@ -133,9 +154,12 @@ function CircusScene:setConfigUi()
             self.jumpTimeLable:setString("jump time " .. CONSTANTS.JUMP_TIME) 
         end
     end
-    self.speedSlider:addEventListener(speedCallBack)
     self.attachWidthSlider:addEventListener(attachCallback)
     self.jumpTimeSlider:addEventListener(jumpTimeCallBack)
+    local resetfunc = function(ref, event_type)
+        self:reset()
+    end
+    self.againButton:addClickEventListener(resetfunc)
 end
 
 
